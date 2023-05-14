@@ -1,16 +1,15 @@
 # для начала работы нужно подключить модуль далее:
 import sqlite3 as sq  # для удобства зададим синоним sq
 
-
 # Далее мы вызываем метод connect() который устанавливает связь с некой базой данных. Причём этот файл
 # с которым устанавливается связь должен быть в том же каталоге. Если его нет, то он создастся
 # автоматически
 
 con = sq.connect("saper.db")
 
-# далее для непосредственного взаимодействия с БД нужно использовать объект cursor(). Метод cursor
+# Далее для непосредственного взаимодействия с БД нужно использовать объект cursor(). Метод cursor
 # возвращает экземпляр класса Cursor и уже через него осуществляем непосредственную работу.
-cur = con.cursor() # Cursor
+cur = con.cursor()  # Cursor
 # В самом простом случае можно вызвать метод execute() которому передаётся sql-запрос для работы с БД
 cur.execute(""" """)
 
@@ -18,7 +17,7 @@ cur.execute(""" """)
 # на который ссылается переменная con:
 con.close()
 
-# способ открытия для работы БД описанный выше не самый лучший вариант т.к. в случае ошибок не сработает
+# Способ открытия для работы БД описанный выше не самый лучший вариант т.к. в случае ошибок не сработает
 # метод close и база не закроется. А делать это лучше через контекстный менеджер:
 
 with sq.connect("saper.db") as con:
@@ -27,8 +26,13 @@ with sq.connect("saper.db") as con:
 
 # Для создания таблицы нужно передать методу execute определённые аргументы:
 # запрос типа CREATE TABLE (пишутся большими буквами) users создаст таблицу с названием users.
-# И далее в скобках перечисляем
-# все поля таблицы (пишутся маленькими буквами) с типами вводимых данных)
+# И далее в скобках перечисляем все поля таблицы (пишутся маленькими буквами) с типами вводимых данных
+# В свою очередь типы вводимых данных могут быть следующие:
+# NULL - значение NULL
+# INTEGER - целочисленный тип (занимает от 1 до 8 байт)
+# REAL - вещественный тип (8 байт в формате IEEE)
+# TEXT - строковый тип (в кодировке данных базы, обычно UTF-8)
+# BLOG - двоичные данные(хранятся "как есть") например для небольших изображений
 
 # with sq.connect("saper.db") as con:
 #     cur = con.cursor()
@@ -82,7 +86,7 @@ with sq.connect("saper.db") as con:
 # отсутствия таблиц при удалении не выводились ошибки типа: no such tables:
 with sq.connect("saper.db") as con:
     cur = con.cursor()
-    cur.execute("DROP TABLE IF EXISTS users") # используем IF EXIST
+    cur.execute("DROP TABLE IF EXISTS users")  # используем IF EXIST
 
 # создаём новую
 with sq.connect("saper.db") as con:
@@ -102,7 +106,7 @@ with sq.connect("saper.db") as con:
 # sqlite_sequence необходимая для реализации AUTOINCREMENT.
 with sq.connect("saper.db") as con:
     cur = con.cursor()
-    cur.execute("DROP TABLE users") # используем IF EXIST
+    cur.execute("DROP TABLE users")  # используем IF EXIST
 
 # создаём новую
 with sq.connect("saper.db") as con:
@@ -110,7 +114,7 @@ with sq.connect("saper.db") as con:
     cur.execute("""CREATE TABLE IF NOT EXISTS users (
      user_id INTEGER PRIMARY KEY AUTOINCREMENT,
      name TEXT NOT NULL,
-     sex INTEGER DEFAULT 1,
+     sex INTEGER NOT NULL DEFAULT 1,
      old INTEGER,
      score INTEGER
      )""")
