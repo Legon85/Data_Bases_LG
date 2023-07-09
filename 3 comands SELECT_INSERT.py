@@ -39,10 +39,10 @@ import sqlite3 as sq
 
 # Например: SELECT * FROM users WHERE old > 20 AND score < 1000
 # SELECT * FROM users WHERE old IN(19,32) AND score < 1000
-# SELECT * FROM users WHERE old IN(19,32) AND score < 1000 OR sex = 1 (в данно случае приоритет операции AND выше OR
-# и сначала выполняется сравнение AND. Если приоритет требуется поменять то нужно приоритетную операцию проставить в
-# скобки: SELECT * FROM users WHERE old IN(19,32) AND (score < 1000 OR sex = 1). Самый же высокий приоритет имеет
-# оператор NOT при его наличии.
+# SELECT * FROM users WHERE old IN(19,32) AND score < 1000 OR sex = 1 (в данном случае приоритет операции AND
+# выше OR и сначала выполняется сравнение AND. Если приоритет требуется поменять то нужно приоритетную операцию
+# проставить в скобки: SELECT * FROM users WHERE old IN(19,32) AND (score < 1000 OR sex = 1). Самый же высокий
+# приоритет имеет оператор NOT при его наличии.
 
 # Дополнительно к SELECT можно прописать оператор ORDER BY для сортировки по указанному столбцу:
 
