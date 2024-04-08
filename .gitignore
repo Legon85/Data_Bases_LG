@@ -2,3 +2,4 @@
 db_test_file.py
 test_saper.db
 test_saper.db-journal
+.tasks/
